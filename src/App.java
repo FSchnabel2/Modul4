@@ -1,41 +1,52 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class App {
+	private static ArrayList<Artikel> al = artikellisteAusDBDummy();
 
 	public static void main(String[] args)
 	{
 		//zu verarbeitende Artikelliste kommt aus untenstehender Hilfsmethode:
-		ArrayList<Artikel> al = artikellisteAusDBDummy();
 		
-		//Je nach Kommandozeilenparameter sollen verschiedene Exporte durchgeführt werden.
-		//In Eclipse können diese Paramter gesetzt werden über (noch ist keiner gesetzt):
-		//über Run->Run Configurations -> Arguments -> Programm Arguments
+		//Je nach Kommandozeilenparameter sollen verschiedene Exporte durchgefï¿½hrt werden.
+		//In Eclipse kï¿½nnen diese Paramter gesetzt werden ï¿½ber (noch ist keiner gesetzt):
+		//ï¿½ber Run->Run Configurations -> Arguments -> Programm Arguments
 		if(args.length>0)
 		{
 			String parameter = args[0];
 			switch(parameter)
 			{
 			case "CSV":
-				//CSV-Export durchführen
+				csvExport();
 				break;
 			case "JSON":
-				//JSON-Export durchführen
+				Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				String json = gson.toJson(al);
+				System.out.println(json);
 				break;
 			default:
-				//CSV-Export durchführen
+				//CSV-Export durchfï¿½hren
 				break;
 			}
 		} else //kein Parameter, dann CSV-Export (Standard)
 		{
-			//CSV-Export
+			csvExport();
+		}
+	}
+
+	public static void csvExport() {
+		for(Artikel a : al) {
+			System.out.println(a.getNummer()+";"+a.getBezeichnung()+";"+a.getEinkaufspreis()+";"+a.getAblaufdatum()+";"+a.getKategorienummer());
 		}
 	}
 
 	/**
 	 * Diese Methode liefert eine Beispielliste mit Artikeln,
 	 * wie sie von der Export-Applikation verarbeitet werden soll.
-	 * Später wird diese Methode die Daten aus einer Datenbank holen.
+	 * Spï¿½ter wird diese Methode die Daten aus einer Datenbank holen.
 	 * Das ist aber nicht Teil des aktuellen JAVA Export Prototpyen.
 	 * @return Beispielliste, mit der gearbeitet werden soll.
 	 */

@@ -40,7 +40,7 @@ public class Kommandozeilenmenue {
 	
 	public void ausgabe()
 	{
-		System.out.println("AUSGABE");
+		System.out.println("Hier sind alle Artikel in der Datenbank:");
 	}
 	
 	public void rechnen()
