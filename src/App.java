@@ -5,11 +5,11 @@ import java.util.GregorianCalendar;
 
 public class App {
 	private static ArrayList<Artikel> al = artikellisteAusDBDummy();
+	private static Export export;
 
 	public static void main(String[] args)
 	{
 		//zu verarbeitende Artikelliste kommt aus untenstehender Hilfsmethode:
-		ArrayList<Artikel> al = artikellisteAusDBDummy();
 
 		//Je nach Kommandozeilenparameter sollen verschiedene Exporte durchgeführt werden.
 		//In Eclipse können diese Paramter gesetzt werden über (noch ist keiner gesetzt):
@@ -28,8 +28,8 @@ public class App {
 					break;
 				case "JSON":
 					//JSON-Export durchführen
-
-					System.out.println(json);
+					export = new JSONExport();
+					export.export(al);
 					break;
 				default:
 					csvExport();
@@ -40,6 +40,11 @@ public class App {
 			//CSV-Export
 			csvExport();
 		}
+	}
+
+	public static void csvExport() {
+		export = new CSVExport();
+		export.export(al);
 	}
 
 	/**

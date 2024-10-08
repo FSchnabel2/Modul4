@@ -8,5 +8,6 @@ public class JSONExport extends Export {
     public void export(ArrayList<Artikel> al) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(al);
+        System.out.println(json);
     }
 }
