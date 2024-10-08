@@ -28,8 +28,7 @@ public class App {
 					break;
 				case "JSON":
 					//JSON-Export durchführen
-					Gson gson = new GsonBuilder().setPrettyPrinting().create();
-					String json = gson.toJson(al);
+
 					System.out.println(json);
 					break;
 				default:
@@ -40,11 +39,6 @@ public class App {
 		{
 			//CSV-Export
 			csvExport();
-		}
-	}
-	public static void csvExport() {
-		for(Artikel a : al) {
-			System.out.println(a.getNummer()+";"+a.getBezeichnung()+";"+a.getEinkaufspreis()+";"+a.getAblaufdatum()+";"+a.getKategorienummer());
 		}
 	}
 
